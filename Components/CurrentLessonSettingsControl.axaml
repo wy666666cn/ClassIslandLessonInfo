@@ -1,0 +1,69 @@
+<controls:ComponentBase x:Class="ClassIslandLessonInfo.Components.CurrentLessonSettingsControl"
+                        x:TypeArguments="settings:CurrentLessonSettings"
+                        xmlns="https://github.com/avaloniaui"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:controls="clr-namespace:ClassIsland.Core.Abstractions.Controls;assembly=ClassIsland.Core"
+                        xmlns:settings="clr-namespace:ClassIslandLessonInfo.Models"
+                        xmlns:local="clr-namespace:ClassIslandLessonInfo.Components">
+    <ScrollViewer>
+        <StackPanel Classes="component-settings-container" Margin="8"
+                    DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:CurrentLessonSettingsControl}}">
+
+            <StackPanel Spacing="4" Margin="0,0,0,16">
+                <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,4">
+                    <TextBlock Text="科目 / 活动名 字号" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Settings.LessonFontSize}"
+                               FontWeight="SemiBold" VerticalAlignment="Center"/>
+                </Grid>
+                <Slider Minimum="12" Maximum="40" IsSnapToTickEnabled="True" TickFrequency="1"
+                        Value="{Binding Settings.LessonFontSize}"/>
+            </StackPanel>
+
+            <StackPanel Spacing="4" Margin="0,0,0,16">
+                <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,4">
+                    <TextBlock Text="时间 字号" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Settings.TimeFontSize}"
+                               FontWeight="SemiBold" VerticalAlignment="Center"/>
+                </Grid>
+                <Slider Minimum="10" Maximum="32" IsSnapToTickEnabled="True" TickFrequency="1"
+                        Value="{Binding Settings.TimeFontSize}"/>
+            </StackPanel>
+
+            <StackPanel Spacing="4" Margin="0,0,0,16">
+                <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,4">
+                    <TextBlock Text="显示进度条" VerticalAlignment="Center"/>
+                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding Settings.ShowProgressBar}"/>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Spacing="4" Margin="0,0,0,16">
+                <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,4">
+                    <TextBlock Text="进度条粗度" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Settings.ProgressBarThickness}"
+                               FontWeight="SemiBold" VerticalAlignment="Center"/>
+                </Grid>
+                <Slider Minimum="1" Maximum="12" IsSnapToTickEnabled="True" TickFrequency="1"
+                        Value="{Binding Settings.ProgressBarThickness}"/>
+            </StackPanel>
+
+            <StackPanel Spacing="4" Margin="0,0,0,16">
+                <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,4">
+                    <TextBlock Text="倒计时循环显示" VerticalAlignment="Center"/>
+                    <ToggleSwitch Grid.Column="1" IsChecked="{Binding Settings.EnableCountdownCycle}"/>
+                </Grid>
+            </StackPanel>
+
+            <StackPanel Spacing="4" Margin="0,0,0,16">
+                <Grid ColumnDefinitions="*,Auto" Margin="0,0,0,4">
+                    <TextBlock Text="循环间隔（秒，如 5 即每 5 秒翻转）" VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Settings.CycleInterval}"
+                               FontWeight="SemiBold" VerticalAlignment="Center"/>
+                </Grid>
+                <Slider Minimum="1" Maximum="30" IsSnapToTickEnabled="True" TickFrequency="1"
+                        Value="{Binding Settings.CycleInterval}"/>
+            </StackPanel>
+
+            <Button Content="恢复默认设置" HorizontalAlignment="Left" Click="ResetDefaults_Click"/>
+        </StackPanel>
+    </ScrollViewer>
+</controls:ComponentBase>

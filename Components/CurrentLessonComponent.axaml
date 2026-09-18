@@ -1,0 +1,26 @@
+<ci:ComponentBase x:Class="ClassIslandLessonInfo.Components.CurrentLessonComponent"
+                  x:TypeArguments="settings:CurrentLessonSettings"
+                  xmlns="https://github.com/avaloniaui"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:ci="http://classisland.tech/schemas/xaml/core"
+                  xmlns:settings="clr-namespace:ClassIslandLessonInfo.Models"
+                  xmlns:local="clr-namespace:ClassIslandLessonInfo.Components">
+    <Grid DataContext="{Binding RelativeSource={RelativeSource AncestorType=local:CurrentLessonComponent}}">
+        <!-- 文字垂直居中 -->
+        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+            <TextBlock x:Name="LessonText" FontSize="{Binding Settings.LessonFontSize}" FontWeight="SemiBold"
+                       VerticalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis">
+                <TextBlock.Effect>
+                    <BlurEffect Radius="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock x:Name="TimeText" FontSize="{Binding Settings.TimeFontSize}" Opacity="0.85"
+                       VerticalAlignment="Center" TextWrapping="NoWrap"/>
+        </StackPanel>
+        <!-- 进度条贴底部、横跨整行 -->
+        <ProgressBar x:Name="ProgressBar" Minimum="0" Maximum="1"
+                     HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                     Height="{Binding Settings.ProgressBarThickness}"
+                     IsVisible="{Binding Settings.ShowProgressBar, FallbackValue=False}"/>
+    </Grid>
+</ci:ComponentBase>

@@ -1,0 +1,11 @@
+# 插件清单文件使用 YAML 格式存储。
+# 插件清单格式：https://docs.classisland.tech/zh-cn/latest/dev/plugins/create-project/#%E6%8F%92%E4%BB%B6%E6%B8%85%E5%8D%95%E6%96%87%E4%BB%B6
+
+id: ClassIslandLessonInfo
+name: 当前课程信息
+description: 在 ClassIsland 主界面单行显示当前课程/活动、上下课时间，支持可自定义字号、进度条、倒计时循环切换与模糊过渡。
+entranceAssembly: "ClassIslandLessonInfo.dll"
+url: https://github.com/wy666666cn/ClassIslandLessonInfo
+version: 1.0.0.0
+apiVersion: 2.0.0.0
+author: wy
