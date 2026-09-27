@@ -96,14 +96,20 @@ public partial class CurrentLessonComponent : ComponentBase<CurrentLessonSetting
         }
     }
 
-    /// <summary>倒计时文字：按当前时间点状态加前缀——上课=距下课，课间/准备上课=距上课，放学=已放学。</summary>
-    private string GetCountdownText(TimeState state) => state switch
+    /// <summary>倒计时文字：按当前时间点状态加前缀。剩余时间用「当前时间点结束时刻 - 现在」计算，
+    /// 不依赖下一个课间是否存在，避免倒数第二节课等无课间时段显示错误。</summary>
+    private string GetCountdownText(TimeState state)
     {
-        TimeState.OnClass => $"距下课 {_lessons.OnBreakingTimeLeftTime:mm\\:ss}",
-        TimeState.Breaking or TimeState.PrepareOnClass => $"距上课 {_lessons.OnClassLeftTime:mm\\:ss}",
-        TimeState.AfterSchool => "已放学",
-        _ => "已放学"
-    };
+        var tl = _lessons.CurrentTimeLayoutItem;
+        var left = tl.EndTime - DateTime.Now.TimeOfDay;
+        if (left < TimeSpan.Zero) left = TimeSpan.Zero;
+        return state switch
+        {
+            TimeState.OnClass => $"距下课 {left:mm\\:ss}",
+            TimeState.Breaking => $"距上课 {left:mm\\:ss}",
+            _ => "已放学"
+        };
+    }
 
     /// <summary>切换时的模糊过渡：先把文字模糊，再逐帧收清晰。</summary>
     private void AnimateBlurIn()
